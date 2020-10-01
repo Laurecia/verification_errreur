@@ -1,5 +1,65 @@
 # verification_errreur
-# bitparite.cpp 
+# bitparite.cpp
+include<stdio.h>
+typedef unsigned char OCTET;
+
+OCTET Parite (OCTET);## fonction qui retourne un bytearray pair
+void Affich (OCTET); ## fonction qui retourne un bytearray impair
+int saisie (void); ##saisie du nombre entier
+
+int main (void)
+{
+    OCTET mot;
+    mot = saisie();
+    Affich(mot);
+    mot = Parite(mot);
+    Affich(mot);
+  
+    return 0;
+}
+
+# la conversion de la parite
+# fonction qui retourne un bytearray pair
+OCTET Parite (OCTET cara)
+{
+    int count,nb = 0; ## la fonction count compte les elements dans un array
+    OCTET masque = 0x01;
+    for(count=0; count<7; count++)
+    {
+        if(cara & masque)
+            nb++;
+        masque <<=1;
+    }
+    if (nb%2 != 0)
+        cara = cara  | 0x80;
+    return cara;
+
+}
+# fonction qui retourne un bytearray impair
+void Affich (OCTET mot)
+{
+     int i;
+     char tab[8];
+     for(i=0; i<8; i++)
+     {
+         tab[7-i] = mot%2;
+         mot >>=1;
+     }
+     for(i=0; i<8; i++)
+         printf("%d",tab[i]);
+     puts("");
+}
+# saisie d'un entier
+int saisie (void)
+{
+    int c;
+           
+            printf("\n veuillez entrer un entier : ");
+            scanf("%d",&c);
+    puts("");
+    return c;
+}
+
 cette fonction "bytearray" permet de 
 
  -Calculer le bit de parité qui retourne un bytearray pair
